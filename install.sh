@@ -11,22 +11,22 @@ function is_installed {
 }
 
 function install_macos {
-  if [[ $OSTYPE != darwin* ]]; then
+  if [[ $OSTYPE != linux-gnu* ]]; then
     return
   fi
-  echo "MacOS detected"
-  xcode-select --install
+  echo "Linux-gnu detected"
+  # xcode-select --install
 
   if [ "$(is_installed brew)" == "0" ]; then
     echo "Installing Homebrew"
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
 
-  if [ $TERM_PROGRAM != "iTerm.app" ]; then
-    echo "Installing iTerm2"
-    brew tap caskroom/cask
-    brew cask install iterm2
-  fi
+  # if [ $TERM_PROGRAM != "iTerm.app" ]; then
+  #   echo "Installing iTerm2"
+  #   brew tap caskroom/cask
+  #   brew cask install iterm2
+  # fi
 
   if [ "$(is_installed zsh)" == "0" ]; then
     echo "Installing zsh"
